@@ -16,6 +16,7 @@ public abstract class Enterprise extends EmployeeOrganization{
 
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
+    private String xyz;
     
     public Enterprise(String name, EnterpriseType type) {
         super(name);

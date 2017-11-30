@@ -18,7 +18,7 @@ import com.db4o.ta.TransparentPersistenceSupport;
  */
 public class DB4OUtil {
 
-   private static final String FILENAME = "C:\\Users\\Romell\\Documents\\NetBeansProjects\\RAE.db4o"; // path to the data store
+   private static final String FILENAME = "C:\\Aedfinalproject\\aed_final_project_rae\\RAE\\databank\\RAE.db4o"; // path to the data store
   //    private static final String FILENAME = "DataBank.db4o"; // path to the data store
   
     private static DB4OUtil dB4OUtil;
