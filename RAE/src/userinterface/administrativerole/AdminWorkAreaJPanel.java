@@ -27,8 +27,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.util.Timer;
 import java.util.TimerTask;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+//import sun.audio.AudioPlayer;
+//import sun.audio.AudioStream;
 import userinterface.LoginScreen;
 //import business.audiofile.warn_sound.au;
 
@@ -321,9 +321,9 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
        String audioFile = "D://AED//Emergency_Response_Time_Reduction/warn_sound.au";
        // String audioFile = business.audiofile.warn_sound.au;
      
-        final InputStream   input = new FileInputStream(audioFile);
-        final    AudioStream playAudioStream = new AudioStream(input);
-        AudioPlayer.player.start(playAudioStream);
+//        final InputStream   input = new FileInputStream(audioFile);
+//        final    AudioStream playAudioStream = new AudioStream(input);
+//        AudioPlayer.player.start(playAudioStream);
        
         JOptionPane.showMessageDialog(null, "Please raise the Emergency request in 'Raise and View Emergency Request Status'","Handle "+emergencyCount+" Emergency",JOptionPane.WARNING_MESSAGE);
         patientVitalSignViaSensor.setIsemergencyhandled(true);
