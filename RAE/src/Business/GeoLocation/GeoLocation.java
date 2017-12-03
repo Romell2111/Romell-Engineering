@@ -20,7 +20,7 @@ public class GeoLocation {
     public static ServerLocation getLocation(String ipAddress) throws IOException {
 
 	File file = new File(
-	    "C:\\Users\\eric\\AED_LAB_DEMO\\RAE\\aed_final_project_rae\\RAE\\GeoLocation\\GeoLiteCity.dat\\GeoLiteCity.dat");
+	    "C:\\Aedfinalproject\\aed_final_project_rae\\RAE\\GeoLocation\\GeoLiteCity.dat");
 	return getLocation(ipAddress, file);
 
   }

@@ -10,14 +10,14 @@ package Business.workQueue;
  * @author Akshay Singh
  */
 public class LabWorkRequest extends WorkRequest {
-      private String testResult;
+      private String testCaseResult;
 
     public String getTestResult() {
-        return testResult;
+        return testCaseResult;
     }
 
-    public void setTestResult(String testResult) {
-        this.testResult = testResult;
+    public void setTestResult(String testCaseResult) {
+        this.testCaseResult = testCaseResult;
     }
     
     
