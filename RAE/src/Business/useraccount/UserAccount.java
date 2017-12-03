@@ -18,14 +18,14 @@ public class UserAccount {
     private String password;
     private Role role;
     private WorkQueue workQueue;
-    private ApplicationUser applicationUser;
+    private ApplicationUser au;
 
     public ApplicationUser getApplicationUser() {
-        return applicationUser;
+        return au;
     }
 
     public void setApplicationUser(ApplicationUser applicationUser) {
-        this.applicationUser = applicationUser;
+        this.au = applicationUser;
     }
     
 

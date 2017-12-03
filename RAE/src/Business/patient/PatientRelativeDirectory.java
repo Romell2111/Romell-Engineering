@@ -25,9 +25,9 @@ public class PatientRelativeDirectory {
      patientRelativeDirectory = new ArrayList<>();
  }  
      public PatientRelative addPatientRealative(){
-        PatientRelative pr = new PatientRelative();
-        patientRelativeDirectory.add(pr);
-        return pr;
+        PatientRelative patientrelative = new PatientRelative();
+        patientRelativeDirectory.add(patientrelative);
+        return patientrelative;
         
     }
     

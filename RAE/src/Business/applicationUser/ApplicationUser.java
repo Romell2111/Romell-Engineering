@@ -13,17 +13,14 @@ import Business.useraccount.UserAccount;
  * @author Akshay Singh
  */
 public class ApplicationUser {
-       private int id;
     private String name;
-    private UserAccount ua;
+       private int id;
     
-//    private static int count = 1;
         private int count;
     public ApplicationUser() {
         id = EcoSystem.getInstance().getUserAccountDirectory().getUserAccountList().size();
-        //count++;
+        
     }
-    
     
     public int getId() {
         return id;

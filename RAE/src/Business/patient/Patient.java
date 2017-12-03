@@ -15,45 +15,20 @@ public class Patient extends ApplicationUser {
     private String patientLocation;
     private String patientContact;
     private String patientRelativeContact;
-    private String patientRelativeContact2;
-    private int age;
-    private String primaryDoctorName;
-    private String primaryDoctorContact;
-    private String preferredePharmacy;
-    private PatientVitalSignHistory patientVitalSignHistory;
+    private String patientRelativeContact1;
+    private String DoctorContact;
+    private String Pharmacy;
+    private PatientVitalSignHistory pvsh;
+    private int Age;
+    private String DoctorName;
+
+    
     
     
     
     public Patient(){
-        patientVitalSignHistory = new PatientVitalSignHistory();
+    pvsh = new PatientVitalSignHistory();
     }
-
-    public PatientVitalSignHistory getPatientVitalSignHistory() {
-        return patientVitalSignHistory;
-    }
-
-    public void setPatientVitalSignHistory(PatientVitalSignHistory patientVitalSignHistory) {
-        this.patientVitalSignHistory = patientVitalSignHistory;
-    }
-
-    public String getPatientRelativeContact2() {
-        return patientRelativeContact2;
-    }
-
-    public void setPatientRelativeContact2(String patientRelativeContact2) {
-        this.patientRelativeContact2 = patientRelativeContact2;
-    }
-
-    
-    
-    public String getPrimaryDoctorContact() {
-        return primaryDoctorContact;
-    }
-
-    public void setPrimaryDoctorContact(String primaryDoctorContact) {
-        this.primaryDoctorContact = primaryDoctorContact;
-    }
-    
 
     public String getPatientLocation() {
         return patientLocation;
@@ -62,8 +37,6 @@ public class Patient extends ApplicationUser {
     public void setPatientLocation(String patientLocation) {
         this.patientLocation = patientLocation;
     }
-
-
 
     public String getPatientContact() {
         return patientContact;
@@ -81,32 +54,55 @@ public class Patient extends ApplicationUser {
         this.patientRelativeContact = patientRelativeContact;
     }
 
-  
+    public String getPatientRelativeContact1() {
+        return patientRelativeContact1;
+    }
+
+    public void setPatientRelativeContact1(String patientRelativeContact1) {
+        this.patientRelativeContact1 = patientRelativeContact1;
+    }
+
+    public String getDoctorContact() {
+        return DoctorContact;
+    }
+
+    public void setDoctorContact(String DoctorContact) {
+        this.DoctorContact = DoctorContact;
+    }
+
+    public String getPharmacy() {
+        return Pharmacy;
+    }
+
+    public void setPharmacy(String Pharmacy) {
+        this.Pharmacy = Pharmacy;
+    }
+
+    public PatientVitalSignHistory getPvsh() {
+        return pvsh;
+    }
+
+    public void setPvsh(PatientVitalSignHistory pvsh) {
+        this.pvsh = pvsh;
+    }
+
     public int getAge() {
-        return age;
+        return Age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setAge(int Age) {
+        this.Age = Age;
     }
 
-    public String getPrimaryDoctorName() {
-        return primaryDoctorName;
+    public String getDoctorName() {
+        return DoctorName;
     }
 
-    public void setPrimaryDoctorName(String primaryDoctorName) {
-        this.primaryDoctorName = primaryDoctorName;
+    public void setDoctorName(String DoctorName) {
+        this.DoctorName = DoctorName;
     }
 
-    public String getPreferredePharmacy() {
-        return preferredePharmacy;
-    }
-
-    public void setPreferredePharmacy(String preferredePharmacy) {
-        this.preferredePharmacy = preferredePharmacy;
-    }
-
-    
+  
     
     
 @Override

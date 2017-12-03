@@ -18,16 +18,23 @@ public abstract  class Organization {
     
     private String name;
     private WorkQueue workQueue;
-    private int organizationID;
-    private UserAccountDirectory userAccountDirectory;
-   // private static int counter;
+    private UserAccountDirectory uad;
+    private int ambulanceNo;
+
+
+    public int getAmbulanceNo() {
+        return ambulanceNo;
+    }
+
+    public void setAmbulanceNo(int ambulanceNo) {
+        this.ambulanceNo = ambulanceNo;
+    }
     
     public Organization(String name) {
+             workQueue = new WorkQueue();
+         uad = new UserAccountDirectory();
         this.name = name;
-        workQueue = new WorkQueue();
-         userAccountDirectory = new UserAccountDirectory();
-     //   organizationID = counter;
-       // ++counter;
+   
     }
     
     public enum Type{
@@ -44,13 +51,7 @@ public abstract  class Organization {
   
     public abstract ArrayList<Role> getSupportedRole();
     
-  
-//    public int getOrganizationID() {
-//        return organizationID;
-//    }
-//
-//  
-//    
+ 
     public String getName() {
         return name;
     }
@@ -68,11 +69,11 @@ public abstract  class Organization {
     }
 
     public UserAccountDirectory getUserAccountDirectory() {
-        return userAccountDirectory;
+        return uad;
     }
 
     public void setUserAccountDirectory(UserAccountDirectory userAccountDirectory) {
-        this.userAccountDirectory = userAccountDirectory;
+        this.uad = userAccountDirectory;
     }
 
     

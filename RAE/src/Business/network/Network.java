@@ -13,14 +13,14 @@ import Business.enterprise.EnterpriseDirectory;
  */
 public class Network {
     private String name;
-    private EnterpriseDirectory enterpriseDirectory;
+    private EnterpriseDirectory ed;
 
     public Network() {
-        enterpriseDirectory = new EnterpriseDirectory();
+        ed = new EnterpriseDirectory();
     }
 
     public EnterpriseDirectory getEnterpriseDirectory() {
-        return enterpriseDirectory;
+        return ed;
     }
 
     public String getName() {

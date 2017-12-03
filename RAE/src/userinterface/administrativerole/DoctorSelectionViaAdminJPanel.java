@@ -258,8 +258,8 @@ private void populateFields(){
 
     patientIdJTextField.setText(String.valueOf(patient.getId()));
         patientNameJTextField.setText(patient.getName());
-        priDoctorJTextField.setText(patient.getPrimaryDoctorName());
-        doctorContactJTextField.setText(patient.getPrimaryDoctorContact());
+        priDoctorJTextField.setText(patient.getDoctorName());
+        doctorContactJTextField.setText(patient.getDoctorContact());
         
 }
 

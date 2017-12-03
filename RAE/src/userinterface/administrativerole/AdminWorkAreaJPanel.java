@@ -314,8 +314,8 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         if (organizatn instanceof PatientOrganization){
        PatientOrganization orgn = (PatientOrganization) organizatn;
        for(Patient pat: orgn.getPatientDirectory().getPatientDirectory()){
-             for(PatientVitalSignViaSensor patientVitalSignViaSensor: pat.getPatientVitalSignHistory().getVitalSignHistory()){
-    if(patientVitalSignViaSensor.getVitalSignStatus().equalsIgnoreCase("Abnormal") && patientVitalSignViaSensor.isEmergengcyHandled() == false ){
+             for(PatientVitalSignViaSensor patientVitalSignViaSensor: pat.getPvsh().getVitalSignHistory()){
+    if(patientVitalSignViaSensor.getVitalSignStatus().equalsIgnoreCase("Abnormal") && patientVitalSignViaSensor.isIsemergencyhandled()== false ){
         emergencyCount++;      
  
        String audioFile = "D://AED//Emergency_Response_Time_Reduction/warn_sound.au";
@@ -326,7 +326,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         AudioPlayer.player.start(playAudioStream);
        
         JOptionPane.showMessageDialog(null, "Please raise the Emergency request in 'Raise and View Emergency Request Status'","Handle "+emergencyCount+" Emergency",JOptionPane.WARNING_MESSAGE);
-        patientVitalSignViaSensor.setEmergengcyHandled(true);
+        patientVitalSignViaSensor.setIsemergencyhandled(true);
         }
      }
         }

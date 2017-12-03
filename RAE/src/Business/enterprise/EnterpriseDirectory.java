@@ -12,21 +12,21 @@ import java.util.ArrayList;
  * @author Akshay Singh
  */
 public class EnterpriseDirectory {
-      private ArrayList<Enterprise> enterpriseList;
+      private ArrayList<Enterprise> enterpriselist;
 
     public EnterpriseDirectory() {
-        enterpriseList = new ArrayList<>();
+        enterpriselist = new ArrayList<>();
     }
 
     public ArrayList<Enterprise> getEnterpriseList() {
-        return enterpriseList;
+        return enterpriselist;
     }
     
     public Enterprise createAndAddEnterprise(String name, Enterprise.EnterpriseType type){
         Enterprise enterprise = null;
         if (type == Enterprise.EnterpriseType.Hospital){
             enterprise = new HospitalEnterprise(name);
-            enterpriseList.add(enterprise);
+            enterpriselist.add(enterprise);
         }
         return enterprise;
     }

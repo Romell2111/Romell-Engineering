@@ -13,41 +13,42 @@ import java.util.ArrayList;
  * @author Akshay Singh
  */
 public class OrganizationDirectory {
-    private ArrayList<Organization> organizationList;
+    private ArrayList<Organization> orgList;
 
     public OrganizationDirectory() {
-        organizationList = new ArrayList<>();
+        orgList = new ArrayList<>();
     }
 
     public ArrayList<Organization> getOrganizationList() {
-        return organizationList;
+        return orgList;
     }
     
-    public Organization createOrganization(Type type){
+    public Organization createOrganization(Type type,int no){
         Organization organization = null;
         if (type.getValue().equals(Type.Doctor.getValue())){
             organization = new DoctorOrganization();
-            organizationList.add(organization);
+            orgList.add(organization);
         }
+         else if (type.getValue().equals(Type.Nurse.getValue())){
+            organization = new NurseOrganization();
+            orgList.add(organization);
+         }
         else if (type.getValue().equals(Type.Lab.getValue())){
             organization = new LabOrganization();
-            organizationList.add(organization);
+            orgList.add(organization);
         }
-        else if (type.getValue().equals(Type.Nurse.getValue())){
-            organization = new NurseOrganization();
-            organizationList.add(organization);
+      else if (type.getValue().equals(Type.Ambulance.getValue())){
+            organization = new AmbulanceOrganization();
+            organization.setAmbulanceNo(no);
+            orgList.add(organization);
         }
     
         else if (type.getValue().equals(Type.Patient.getValue())){
             organization = new PatientOrganization(Type.Patient.getValue());
-            organizationList.add(organization);
+            orgList.add(organization);
         }
     
-        else if (type.getValue().equals(Type.Ambulance.getValue())){
-            organization = new AmbulanceOrganization();
-            organizationList.add(organization);
-        }
-    
+      
         return organization;
     }
     

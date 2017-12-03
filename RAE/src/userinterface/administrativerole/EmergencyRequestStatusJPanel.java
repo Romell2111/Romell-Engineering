@@ -226,9 +226,9 @@ private void raiseRequest(){
                         PatientOrganization org = (PatientOrganization)organization;
                         for(Patient patient: org.getPatientDirectory().getPatientDirectory()){
            
-     for(PatientVitalSignViaSensor patientVitalSignViaSensor: patient.getPatientVitalSignHistory().getVitalSignHistory()){
-  if(patientVitalSignViaSensor.getVitalSignStatus().equalsIgnoreCase("Abnormal") && patientVitalSignViaSensor.isEmergencyRequestRaise() == false){
-patientVitalSignViaSensor.setEmergencyRequestRaise(true);
+     for(PatientVitalSignViaSensor patientVitalSignViaSensor: patient.getPvsh().getVitalSignHistory()){
+  if(patientVitalSignViaSensor.getVitalSignStatus().equalsIgnoreCase("Abnormal") && patientVitalSignViaSensor.isEmergencyraiserequest()== false){
+patientVitalSignViaSensor.setEmergencyraiserequest(true);
     AmbulanceOrganization aorg = null;
     NurseOrganization norg = null;
     LabOrganization lorg = null;
@@ -280,7 +280,7 @@ private void setVitalSignStatus(){
                         PatientOrganization org = (PatientOrganization)organization;
                         for(Patient patient: org.getPatientDirectory().getPatientDirectory()){
            
-     for(PatientVitalSignViaSensor patientVitalSignViaSensor: patient.getPatientVitalSignHistory().getVitalSignHistory()){
+     for(PatientVitalSignViaSensor patientVitalSignViaSensor: patient.getPvsh().getVitalSignHistory()){
     patientVitalSignViaSensor.setVitalSignStatus("Normal");
     System.out.println(patientVitalSignViaSensor.getVitalSignStatus());
     

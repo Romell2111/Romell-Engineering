@@ -26,24 +26,20 @@ public  abstract class EmployeeOrganization extends Organization{
         userAccountDirectory = new UserAccountDirectory();
        
     }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public abstract ArrayList<Role> getSupportedRole();
-    
-    /**
-     *
-     * @return
-     */
-    @Override
+   @Override
     public UserAccountDirectory getUserAccountDirectory() {
         return userAccountDirectory;
     }
 
 
+    @Override
+    public abstract ArrayList<Role> getSupportedRole();
+    
+   @Override
+    public String toString() {
+        return getName();
+    }
+ 
 
     public EmployeeDirectory getEmployeeDirectory() {
         return employeeDirectory;
@@ -51,8 +47,5 @@ public  abstract class EmployeeOrganization extends Organization{
     
     
 
-    @Override
-    public String toString() {
-        return getName();
-    }
+   
 }

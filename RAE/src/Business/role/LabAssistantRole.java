@@ -19,8 +19,8 @@ import userinterface.labassistantrole.LabAssistantWorkAreaJPanel;
 public class LabAssistantRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new LabAssistantWorkAreaJPanel(userProcessContainer, account, organization, business);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount useraccount, Organization organization, Enterprise enterprise, EcoSystem business) {
+        return new LabAssistantWorkAreaJPanel(userProcessContainer, useraccount, organization, business);
     }
     
 }

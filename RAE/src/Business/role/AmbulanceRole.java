@@ -19,8 +19,8 @@ import userinterface.ambulancerole.AmbulanceWorkAreaJPanel;
 public class AmbulanceRole extends Role{
     
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new AmbulanceWorkAreaJPanel(userProcessContainer, account, organization, business);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount useraccount, Organization organization, Enterprise enterprise, EcoSystem business) {
+        return new AmbulanceWorkAreaJPanel(userProcessContainer, useraccount, organization, business);
     }
     
 }

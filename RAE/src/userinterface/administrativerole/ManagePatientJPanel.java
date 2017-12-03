@@ -167,11 +167,11 @@ public class ManagePatientJPanel extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel6.setText("Relative Contact 2");
+        jLabel6.setText("Relative Secondary Email");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel7.setText("Relative Contact");
+        jLabel7.setText("Relative email");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 51, 204));
@@ -339,28 +339,28 @@ return;
       }
 
      
-      if(ValidationMethods.isStringValidContact(contactJTextField.getText())== false){
-            JOptionPane.showMessageDialog(null, "Please provide valid Contact", "Info", JOptionPane.ERROR_MESSAGE);
-       return;  
-      }
-
-      
-        if(ValidationMethods.isStringValidContact(relativeContact2JTextField.getText())== false){
-            JOptionPane.showMessageDialog(null, "Please provide valid Friend Contact", "Info", JOptionPane.ERROR_MESSAGE);
-       return;  
-      }
-
-        
-        if(ValidationMethods.isStringValidContact(relativeContactJTextField.getText())== false){
-            JOptionPane.showMessageDialog(null, "Please provide valid Relative Contact", "Info", JOptionPane.ERROR_MESSAGE);
-       return;  
-      }
+//      if(ValidationMethods.isStringValidContact(contactJTextField.getText())== false){
+//            JOptionPane.showMessageDialog(null, "Please provide valid Contact", "Info", JOptionPane.ERROR_MESSAGE);
+//       return;  
+//      }
+//
+//      
+//        if(ValidationMethods.isStringValidContact(relativeContact2JTextField.getText())== false){
+//            JOptionPane.showMessageDialog(null, "Please provide valid Friend Contact", "Info", JOptionPane.ERROR_MESSAGE);
+//       return;  
+//      }
 
         
-        if(ValidationMethods.isStringValidWithSpace(preferredPharmacyJTextField1.getText())== false){
-            JOptionPane.showMessageDialog(null, "Please provide valid Pharmacy Name", "Info", JOptionPane.ERROR_MESSAGE);
-        return;  
-      }
+//        if(ValidationMethods.isStringValidContact(relativeContactJTextField.getText())== false){
+//            JOptionPane.showMessageDialog(null, "Please provide valid Relative Contact", "Info", JOptionPane.ERROR_MESSAGE);
+//       return;  
+//      }
+//
+//        
+//        if(ValidationMethods.isStringValidWithSpace(preferredPharmacyJTextField1.getText())== false){
+//            JOptionPane.showMessageDialog(null, "Please provide valid Pharmacy Name", "Info", JOptionPane.ERROR_MESSAGE);
+//        return;  
+//      }
         
         
         
@@ -379,8 +379,8 @@ return;
        
         patient.setPatientLocation(locationJTextField.getText());
        
-        patient.setPreferredePharmacy(preferredPharmacyJTextField1.getText());
-       patient.setPatientRelativeContact2(relativeContact2JTextField.getText());
+        patient.setPharmacy(preferredPharmacyJTextField1.getText());
+       patient.setPatientRelativeContact1(relativeContact2JTextField.getText());
         patient.setPatientRelativeContact(relativeContactJTextField.getText());
         patient.setPatientContact(contactJTextField.getText());
         

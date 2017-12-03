@@ -315,7 +315,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="33" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Relative Contact 2"/>
+        <Property name="text" type="java.lang.String" value="Relative Secondary Email"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -326,7 +326,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="33" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Relative Contact"/>
+        <Property name="text" type="java.lang.String" value="Relative email"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">

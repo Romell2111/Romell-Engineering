@@ -14,36 +14,31 @@ import java.util.Date;
  * @author Akshay Singh
  */
 public class PatientVitalSignViaSensor {
+    private boolean isemergencyhandled = false;
+    private boolean emergencyraiserequest = false;
      private int heartRate;
+    private String time;
+    private String vitalSignStatus;
     private float bloodPressure;
     private float weight;
-    private String captureTime;
-    private String vitalSignStatus;
-    private boolean emergengcyHandled = false;
-    private boolean emergencyRequestRaise = false;
 
-    
-    
-    public boolean isEmergencyRequestRaise() {
-        return emergencyRequestRaise;
+
+    public boolean isIsemergencyhandled() {
+        return isemergencyhandled;
     }
 
-    public void setEmergencyRequestRaise(boolean emergencyRequestRaise) {
-        this.emergencyRequestRaise = emergencyRequestRaise;
+    public void setIsemergencyhandled(boolean isemergencyhandled) {
+        this.isemergencyhandled = isemergencyhandled;
     }
 
-    
-    public boolean isEmergengcyHandled() {
-        return emergengcyHandled;
+    public boolean isEmergencyraiserequest() {
+        return emergencyraiserequest;
     }
 
-    public void setEmergengcyHandled(boolean emergengcyHandled) {
-        this.emergengcyHandled = emergengcyHandled;
+    public void setEmergencyraiserequest(boolean emergencyraiserequest) {
+        this.emergencyraiserequest = emergencyraiserequest;
     }
-
     
-    
-
     public int getHeartRate() {
         return heartRate;
     }
@@ -77,22 +72,22 @@ public class PatientVitalSignViaSensor {
     }
 
     public void setCaptureTime() {
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        DateFormat dF= new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Date date = new Date();
-        captureTime = dateFormat.format(date);
+        time = dF.format(date);
        //return captureTime;
     }
 
     public String getCaptureTime(){
         
-     return captureTime;   
+     return time;   
         
     }
         
 
     @Override
     public String toString() {
-        return captureTime;
+        return time;
     }
 
     public String getVitalSignStatus() {

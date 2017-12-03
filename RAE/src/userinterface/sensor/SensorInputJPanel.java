@@ -25,6 +25,13 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import userinterface.LoginScreen;
+import Business.Email.SendMailUsingAuthentication;
+import Business.GeoLocation.GeoLocation;
+import Business.GeoLocation.ServerLocation.ServerLocation;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 /**
  *
  * @author ravidra
@@ -37,6 +44,14 @@ public class SensorInputJPanel extends javax.swing.JPanel {
     
    private EcoSystem system;
    private JPanel container;
+   public String message="EMEREGENCY FOR YOUR RELATIVE";
+   public String sender="romellsegaran2111@gmail.com";
+   public String []patientRelative =new String[2];
+   public String Ipaddress;
+   public double latitude;
+   public double longitude;
+   public String city;
+  
     
     public SensorInputJPanel(JPanel container, EcoSystem system) {
         initComponents();
@@ -68,6 +83,8 @@ public class SensorInputJPanel extends javax.swing.JPanel {
         patientComboBox = new javax.swing.JComboBox();
         backJButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        ipAddressTxtField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 204)));
@@ -139,6 +156,8 @@ public class SensorInputJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setText("IP ADDRESS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,9 +166,12 @@ public class SensorInputJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(218, 218, 218))
-            .addComponent(jTextField1)
+            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(backJButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(127, 127, 127)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,24 +180,21 @@ public class SensorInputJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel7))))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(saveButton)
                             .addComponent(weightTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                             .addComponent(heartRateTextField)
                             .addComponent(bloodPressureTextField)
                             .addComponent(vitalSignStatusTextField)
-                            .addComponent(patientComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(backJButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
-                        .addComponent(saveButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(patientComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ipAddressTxtField))))
+                .addContainerGap(366, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,9 +224,13 @@ public class SensorInputJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(vitalSignStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(ipAddressTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(saveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addComponent(backJButton)
                 .addContainerGap())
         );
@@ -239,7 +262,7 @@ public class SensorInputJPanel extends javax.swing.JPanel {
        // resetFields();
        //PatientVitalSignViaSensor patientVitalSignViaSensor = patient.getPatientVitalSignViaSensor();
            
-PatientVitalSignViaSensor patientVitalSignViaSensor = patient.getPatientVitalSignHistory().addVitalSign();
+PatientVitalSignViaSensor patientVitalSignViaSensor = patient.getPvsh().addVitalSign();
    
 if(ValidationMethods.isIntegerPositive(heartRateTextField.getText()) == false){
     JOptionPane.showMessageDialog(null, "Please enter valid input", "Info", JOptionPane.ERROR_MESSAGE);
@@ -294,7 +317,20 @@ return;
                     vitalSignStatusTextField.setText("Abnormal");
                      patientVitalSignViaSensor.setVitalSignStatus("Abnormal");
                 emergency(patient);
-                message(patient);}
+               
+                patientRelative[0]=patient.getPatientRelativeContact();
+                patientRelative[1]=patient.getPatientRelativeContact1();
+                    try {
+                        SendMailUsingAuthentication.postMail(patientRelative, message, sender);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(SensorInputJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                   geolocation();;
+                    
+                    
+                 
+                
+                }
                 else{
                     vitalSignStatusTextField.setText("Normal");
                      patientVitalSignViaSensor.setVitalSignStatus("Normal");
@@ -312,7 +348,15 @@ return;
                     vitalSignStatusTextField.setText("Abnormal");
                  patientVitalSignViaSensor.setVitalSignStatus("Abnormal");
                 emergency(patient);
-                message(patient);
+                 patientRelative[0]=patient.getPatientRelativeContact();
+                patientRelative[1]=patient.getPatientRelativeContact1();
+                    try {
+                        SendMailUsingAuthentication.postMail(patientRelative, message, sender);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(SensorInputJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    geolocation();
+               
                 }
                 else{
                     vitalSignStatusTextField.setText("Normal");
@@ -330,7 +374,15 @@ return;
                     vitalSignStatusTextField.setText("Abnormal");
                  patientVitalSignViaSensor.setVitalSignStatus("Abnormal");
                 emergency(patient);
-                message(patient);
+                 patientRelative[0]=patient.getPatientRelativeContact();
+                patientRelative[1]=patient.getPatientRelativeContact1();
+                    try {
+                        SendMailUsingAuthentication.postMail(patientRelative, message, sender);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(SensorInputJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    geolocation();
+               
                 }
                 else{
                     vitalSignStatusTextField.setText("Normal");
@@ -352,9 +404,11 @@ return;
     private javax.swing.JButton backJButton;
     private javax.swing.JTextField bloodPressureTextField;
     private javax.swing.JTextField heartRateTextField;
+    private javax.swing.JTextField ipAddressTxtField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -398,8 +452,11 @@ private void emergency(Patient patient){
       request.setMessage("Emergency for Patient:"+patient.getId());
 //      request.setSender(account);
       request.setStatus("Waiting for other Team's response");
+      request.setLatitude(latitude);
+      request.setLongitude(longitude);
     
     for(Network network: system.getNetworkList()){
+        
         for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList()){
             
     for(Organization organizatn: enterprise.getOrganizationDirectory().getOrganizationList()){
@@ -438,11 +495,24 @@ private void resetFields(){
     
     
 }
-private void message(Patient patient)
-{String contact=patient.getPatientRelativeContact();
-String contact2=patient.getPatientRelativeContact2();
+public void geolocation()
+{
+     Ipaddress=ipAddressTxtField.getText();
+                    try {
+                      ServerLocation serverLocation=  GeoLocation.getLocation(Ipaddress);
+                       
+                     latitude=Double.parseDouble(serverLocation.getLatitude());
+                     longitude=Double.parseDouble(serverLocation.getLongitude());
+                     city=serverLocation.getCity();
+                     System.out.println(latitude);
+                     System.out.println(longitude);
+                    } catch (IOException ex) {
+                        Logger.getLogger(SensorInputJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                   
+}
+
 
     
-}
 
 }
