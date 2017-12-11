@@ -10,10 +10,10 @@ package Business.workQueue;
  * @author Akshay Singh
  */
 public class EmergencyWorkRequest extends WorkRequest{
-     private String doctorTestResult;
-    private String nurseTestResult;
-    private String labTestResult;
-    private String ambulanceTestResult;
+     private String docResult;
+    private String nurResult;
+    private String labResult;
+    private String ambResult;
 private double latitude;
 private double longitude;
 
@@ -36,35 +36,35 @@ private double longitude;
    
 
     public String getDoctorTestResult() {
-        return doctorTestResult;
+        return docResult;
     }
 
     public void setDoctorTestResult(String doctorTestResult) {
-        this.doctorTestResult = doctorTestResult;
+        this.docResult = doctorTestResult;
     }
 
     public String getNurseTestResult() {
-        return nurseTestResult;
+        return nurResult;
     }
 
     public void setNurseTestResult(String nurseTestResult) {
-        this.nurseTestResult = nurseTestResult;
+        this.nurResult = nurseTestResult;
     }
 
     public String getLabTestResult() {
-        return labTestResult;
+        return labResult;
     }
 
     public void setLabTestResult(String labTestResult) {
-        this.labTestResult = labTestResult;
+        this.labResult = labTestResult;
     }
 
     public String getAmbulanceTestResult() {
-        return ambulanceTestResult;
+        return ambResult;
     }
 
     public void setAmbulanceTestResult(String ambulanceTestResult) {
-        this.ambulanceTestResult = ambulanceTestResult;
+        this.ambResult = ambulanceTestResult;
     }
 
     @Override

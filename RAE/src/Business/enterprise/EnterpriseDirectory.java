@@ -28,6 +28,17 @@ public class EnterpriseDirectory {
             enterprise = new HospitalEnterprise(name);
             enterpriselist.add(enterprise);
         }
+ else if (type == Enterprise.EnterpriseType.CDC){
+            
+enterprise = new CDCEnterprise(name);
+            
+enterpriselist.add(enterprise);
+        }
+else  if (type == Enterprise.EnterpriseType.Distributor){
+            
+enterprise = new DistributorEnterprise(name);
+            
+enterpriselist.add(enterprise);}
         return enterprise;
     }
     

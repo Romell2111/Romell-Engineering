@@ -24,6 +24,25 @@ public abstract class Role {
         Ambulance("Ambulance"),
         LabAssistant("Lab Assistant");
         
+HospitalAdmin("HospitalAdmin"),
+       
+ DistributorAdmin("DistributorAdmin"),
+        
+CDCAdmin("CDCAdmin"),
+        
+ClinicAdmin("ClinicAdmin"),
+       
+ Doctor("Doctor"),
+       
+ PharmaManager("PharmaManager"),
+       
+ CDCManager("CDCManager"),
+      
+  Provider("Provider"),
+       
+ Supplier("Supplier");
+
+        
         private String value;
         private RoleType(String value){
             this.value = value;

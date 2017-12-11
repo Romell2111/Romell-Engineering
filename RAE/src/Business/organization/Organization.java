@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 package Business.organization;
-
+import Business.Employee.EmployeeDirectory;
 import Business.role.Role;
 import Business.useraccount.UserAccountDirectory;
 import Business.workQueue.WorkQueue;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
@@ -38,7 +39,7 @@ public abstract  class Organization {
     }
     
     public enum Type{
-        Admin("Admin Organization"), Doctor("Doctor Organization"), Ambulance("Ambulance Organization"), Lab("Lab Organization"), Nurse("NurseOrganization"), Patient("PatientOrganization");
+        Admin("Admin Organization"), Doctor("Doctor Organization"), Ambulance("Ambulance Organization"), Lab("Lab Organization"), Nurse("NurseOrganization"), Patient("PatientOrganization"),Clinic("Clinic Organization"),Supplier("Supplier Organization"), Provider("Provider Organization");
         private String value;
         private Type(String value) {
             this.value = value;

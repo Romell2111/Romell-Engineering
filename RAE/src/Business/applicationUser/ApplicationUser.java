@@ -16,10 +16,11 @@ public class ApplicationUser {
     private String name;
        private int id;
     
-        private int count;
+        private int count=0;
     public ApplicationUser() {
+          id=count++;
         id = EcoSystem.getInstance().getUserAccountDirectory().getUserAccountList().size();
-        
+      
     }
     
     public int getId() {

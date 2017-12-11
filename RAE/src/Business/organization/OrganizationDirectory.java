@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 package Business.organization;
+import Business.Supplier.Provider;
 
+import Business.Supplier.Supplier;
 import Business.organization.Organization.Type;
 import java.util.ArrayList;
+import Business.Enterprise.CDCEnterprise;
 
 /**
  *
@@ -47,7 +50,34 @@ public class OrganizationDirectory {
             organization = new PatientOrganization(Type.Patient.getValue());
             orgList.add(organization);
         }
-    
+    if (type.getValue().equals(Type.Clinic.getValue())){
+            
+organization = new ClinicOrganization();
+           
+ organizationList.add(organization);
+        }
+        
+else if (type.getValue().equals(Type.Supplier.getValue())){
+         
+   organization = new SupplierOrganization();
+            
+organizationList.add(organization);
+        }
+       
+        
+else if (type.getValue().equals(Type.Provider.getValue())){
+            
+organization = new ProviderOrganization();
+            
+organizationList.add(organization);
+        }
+        
+else if (type.getValue().equals(Type.CDCManager.getValue())){
+            
+organization = new CDCManagerOrganization();
+            
+organizationList.add(organization);
+        }
       
         return organization;
     }
