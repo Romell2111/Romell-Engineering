@@ -10,14 +10,14 @@ package Business.patient;
  * @author Akshay Singh
  */
 public class PatientRelative {
-    private String contact;
+    private String contactnumber;
 
     public String getContact() {
-        return contact;
+        return contactnumber;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setContact(String contactnumber) {
+        this.contactnumber = contactnumber;
     }
     
 }

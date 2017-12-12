@@ -20,8 +20,8 @@ import userinterface.doctorrole.DoctorWorkAreaJPanel;
 public class DoctorRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new DoctorWorkAreaJPanel(userProcessContainer, account, (DoctorOrganization)organization, enterprise);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount useraccount, Organization organization, Enterprise enterprise, EcoSystem business) {
+        return new DoctorWorkAreaJPanel(userProcessContainer, useraccount, (DoctorOrganization)organization, enterprise);
     }
     
     

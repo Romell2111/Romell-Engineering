@@ -14,13 +14,21 @@ import Business.GeoLocation.ServerLocation.ServerLocation;
 
 /**
  *
+<<<<<<< HEAD
  * @author Romell
+=======
+ * @author eric
+>>>>>>> 1f267105eb8402491cf1ac94cde0087e26ec9d55
  */
 public class GeoLocation {
     public static ServerLocation getLocation(String ipAddress) throws IOException {
 
 	File file = new File(
+<<<<<<< HEAD
 	    "C:\\Users\\Romell\\romell2111\\aed_final_project_rae\\RAE\\GeoLocation\\GeoLiteCity.dat\\GeoLiteCity.dat");
+=======
+	    "C:\\Aedfinalproject\\aed_final_project_rae\\RAE\\GeoLocation\\GeoLiteCity.dat\\GeoLiteCity.dat");
+>>>>>>> 1f267105eb8402491cf1ac94cde0087e26ec9d55
 	return getLocation(ipAddress, file);
 
   }

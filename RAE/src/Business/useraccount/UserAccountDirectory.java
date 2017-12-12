@@ -15,18 +15,18 @@ import java.util.ArrayList;
  * @author Akshay Singh
  */
 public class UserAccountDirectory {
-    private ArrayList<UserAccount> userAccountList;
+    private ArrayList<UserAccount> ual;
 
     public UserAccountDirectory() {
-        userAccountList = new ArrayList<>();
+        ual = new ArrayList<>();
     }
 
     public ArrayList<UserAccount> getUserAccountList() {
-        return userAccountList;
+        return ual;
     }
     
     public UserAccount authenticateUser(String username, String password){
-        for (UserAccount ua : userAccountList)
+        for (UserAccount ua : ual)
             if (ua.getUsername().equals(username) && ua.getPassword().equals(password)){
                 return ua;
             }
@@ -39,14 +39,14 @@ public class UserAccountDirectory {
         userAccount.setPassword(password);
         userAccount.setApplicationUser(applicationUser);
         userAccount.setRole(role);
-        userAccountList.add(userAccount);
+        ual.add(userAccount);
         // EcoSystem.getInstance().getUserAccountDirectory().createUserAccount(username, password, applicationUser, role);
          EcoSystem.getInstance().getUserAccountDirectory().userAccountAdded(userAccount);
         return userAccount;
     }
     
     public boolean checkIfUsernameIsUnique(String username){
-        for (UserAccount ua : userAccountList){
+        for (UserAccount ua : ual){
             if (ua.getUsername().equals(username))
                 return false;
         }
@@ -54,7 +54,7 @@ public class UserAccountDirectory {
     }
 
 public void userAccountAdded(UserAccount ua){
-    userAccountList.add(ua);
+    ual.add(ua);
 }
     
 }

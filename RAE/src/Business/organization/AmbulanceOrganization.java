@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * @author Akshay Singh
  */
 public class AmbulanceOrganization extends EmployeeOrganization {
+
     
       public AmbulanceOrganization() {
         super(Organization.Type.Ambulance.getValue());

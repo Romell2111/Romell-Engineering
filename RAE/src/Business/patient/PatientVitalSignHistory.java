@@ -27,14 +27,14 @@ public class PatientVitalSignHistory {
     }
  
     public PatientVitalSignViaSensor addVitalSign(){
-        PatientVitalSignViaSensor pvs = new PatientVitalSignViaSensor();
-        patientVitalSignHistory.add(pvs);
-        return pvs;
+        PatientVitalSignViaSensor pvsh = new PatientVitalSignViaSensor();
+        patientVitalSignHistory.add(pvsh);
+        return pvsh;
         
     }
  
-    public void deleteVitalSign(PatientVitalSignViaSensor vs){
-        patientVitalSignHistory.remove(vs);
+    public void deleteVitalSign(PatientVitalSignViaSensor vitalsign){
+        patientVitalSignHistory.remove(vitalsign);
     }
     
 }

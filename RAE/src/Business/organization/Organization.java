@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 package Business.organization;
-
+import Business.Employee.EmployeeDirectory;
 import Business.role.Role;
 import Business.useraccount.UserAccountDirectory;
 import Business.workQueue.WorkQueue;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
@@ -18,20 +19,27 @@ public abstract  class Organization {
     
     private String name;
     private WorkQueue workQueue;
-    private int organizationID;
-    private UserAccountDirectory userAccountDirectory;
-   // private static int counter;
+    private UserAccountDirectory uad;
+    private int ambulanceNo;
+
+
+    public int getAmbulanceNo() {
+        return ambulanceNo;
+    }
+
+    public void setAmbulanceNo(int ambulanceNo) {
+        this.ambulanceNo = ambulanceNo;
+    }
     
     public Organization(String name) {
+             workQueue = new WorkQueue();
+         uad = new UserAccountDirectory();
         this.name = name;
-        workQueue = new WorkQueue();
-         userAccountDirectory = new UserAccountDirectory();
-     //   organizationID = counter;
-       // ++counter;
+   
     }
     
     public enum Type{
-        Admin("Admin Organization"), Doctor("Doctor Organization"), Ambulance("Ambulance Organization"), Lab("Lab Organization"), Nurse("NurseOrganization"), Patient("PatientOrganization");
+        Admin("Admin Organization"), Doctor("Doctor Organization"), Ambulance("Ambulance Organization"), Lab("Lab Organization"), Nurse("NurseOrganization"), Patient("PatientOrganization"),Clinic("Clinic Organization"),Supplier("Supplier Organization"), Provider("Provider Organization");
         private String value;
         private Type(String value) {
             this.value = value;
@@ -44,13 +52,7 @@ public abstract  class Organization {
   
     public abstract ArrayList<Role> getSupportedRole();
     
-  
-//    public int getOrganizationID() {
-//        return organizationID;
-//    }
-//
-//  
-//    
+ 
     public String getName() {
         return name;
     }
@@ -68,11 +70,11 @@ public abstract  class Organization {
     }
 
     public UserAccountDirectory getUserAccountDirectory() {
-        return userAccountDirectory;
+        return uad;
     }
 
     public void setUserAccountDirectory(UserAccountDirectory userAccountDirectory) {
-        this.userAccountDirectory = userAccountDirectory;
+        this.uad = userAccountDirectory;
     }
 
     

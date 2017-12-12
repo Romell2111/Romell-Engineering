@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public  class PatientOrganization extends Organization {
 
     
-      private PatientDirectory patientDirectory;
-    private UserAccountDirectory userAccountDirectory;
+      private PatientDirectory pD;
+    private UserAccountDirectory uad;
   
     
        public PatientOrganization() {
@@ -36,24 +36,19 @@ public  class PatientOrganization extends Organization {
    
     public PatientOrganization(String name) {
         super(name);
-        patientDirectory = new PatientDirectory();
-        userAccountDirectory = new UserAccountDirectory();
+        pD = new PatientDirectory();
+        uad= new UserAccountDirectory();
        
     }
 
-   // public abstract ArrayList<Role> getSupportedRole();
+  
+      public PatientDirectory getPatientDirectory() {
+        return pD ;
+    }
     
     public UserAccountDirectory getUserAccountDirectory() {
-        return userAccountDirectory;
+        return  uad;
     }
-
-
-
-    public PatientDirectory getPatientDirectory() {
-        return patientDirectory;
-    }
-    
-    
 
     @Override
     public String toString() {
