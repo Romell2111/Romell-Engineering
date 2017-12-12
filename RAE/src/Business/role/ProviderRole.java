@@ -3,27 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.Role;
+package Business.role;
 
 import Business.EcoSystem;
 import Business.enterprise.Enterprise;
+import Business.network.Network;
 import Business.organization.Organization;
-import Business.Organization.ProviderOrganization;
-import Business.Organization.SupplierOrganization;
 import Business.useraccount.UserAccount;
+
 import javax.swing.JPanel;
-import userinterface.Distributor.Provider.ProviderAdminWorkAreaJPanel;
-import userinterface.Distributor.Supplier.SupplierAdminWorkAreaJPanel;
+import userinterface.ProviderRole.ProviderWorkSpace;
+import userinterface.administrativerole.AdminWorkAreaJPanel;
 
 /**
  *
- * @author Akshay Singh
+ * @author Romell
  */
 public class ProviderRole extends Role{
-
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-         return new ProviderAdminWorkAreaJPanel(userProcessContainer,  account, (ProviderOrganization) organization,  enterprise,  business);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount useraccount, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+        return new ProviderWorkSpace(userProcessContainer, enterprise, useraccount,organization,business);
     }
     
 }

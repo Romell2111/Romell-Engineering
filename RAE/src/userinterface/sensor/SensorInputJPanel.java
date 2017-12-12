@@ -28,6 +28,9 @@ import userinterface.LoginScreen;
 import Business.Email.SendMailUsingAuthentication;
 import Business.GeoLocation.GeoLocation;
 import Business.GeoLocation.ServerLocation.ServerLocation;
+import Business.organization.DoctorOrganization;
+import Business.organization.ProviderOrganization;
+import Business.workQueue.MedicineSupplyWorkRequest;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,6 +61,7 @@ public class SensorInputJPanel extends javax.swing.JPanel {
         this.system  = system;
         this.container = container;
         populatePatientComboBox();
+        saveButton.setEnabled(false);
     }
 
     /**
@@ -89,7 +93,7 @@ public class SensorInputJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtlon = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnLocation = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 204)));
@@ -160,10 +164,10 @@ public class SensorInputJPanel extends javax.swing.JPanel {
 
         jLabel9.setText("Longitude");
 
-        jButton1.setText("Location");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLocation.setText("Location");
+        btnLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLocationActionPerformed(evt);
             }
         });
 
@@ -205,9 +209,9 @@ public class SensorInputJPanel extends javax.swing.JPanel {
                                     .addComponent(patientComboBox, 0, 112, Short.MAX_VALUE)
                                     .addComponent(txtlon)))
                             .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(75, 75, 75))))
+                        .addGap(82, 82, 82)
+                        .addComponent(btnLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,25 +247,21 @@ public class SensorInputJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(vitalSignStatusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(ipAddressTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)
-                                .addGap(13, 13, 13)))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(ipAddressTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtlat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(txtlon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel9)
+                                .addComponent(txtlon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
                         .addComponent(saveButton)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -356,7 +356,7 @@ return;
                     } catch (MessagingException ex) {
                         Logger.getLogger(SensorInputJPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                   geolocation();;
+                  
                     
                     
                  
@@ -386,7 +386,7 @@ return;
                     } catch (MessagingException ex) {
                         Logger.getLogger(SensorInputJPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    geolocation();
+                    
                
                 }
                 else{
@@ -412,7 +412,7 @@ return;
                     } catch (MessagingException ex) {
                         Logger.getLogger(SensorInputJPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    geolocation();
+                    
                
                 }
                 else{
@@ -430,19 +430,18 @@ return;
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void btnLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocationActionPerformed
         geolocation();
         saveButton.setEnabled(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnLocationActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JTextField bloodPressureTextField;
+    private javax.swing.JButton btnLocation;
     private javax.swing.JTextField heartRateTextField;
     private javax.swing.JTextField ipAddressTxtField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -487,6 +486,8 @@ private void emergency(Patient patient){
       AmbulanceOrganization aorg = null;
     NurseOrganization norg = null;
     LabOrganization lorg = null;
+    DoctorOrganization dorg=null;
+    ProviderOrganization porg=null;
     
             
     
@@ -496,10 +497,21 @@ private void emergency(Patient patient){
       request.setStatus("Waiting for other Team's response");
       request.setLatitude(latitude);
       request.setLongitude(longitude);
+      request.setCity(city);
+      
+      MedicineSupplyWorkRequest medrequest=new MedicineSupplyWorkRequest();
+      medrequest.setMessage("Emergency Medicines required for:"+patient.getName()+"ID "+patient.getId());
+      medrequest.setStatus("Waiting for Medicines");
+      medrequest.setQuantity(5);
+      medrequest.setMedicineName(patient.getMedicine().toString());
+      medrequest.setCity(city);
+      
+      
+      
     
     for(Network network: system.getNetworkList()){
-         if (network.getName().equalsIgnoreCase(city))
-         {
+        if (network.getName().equalsIgnoreCase(city))
+        {
         
         for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList()){
             
@@ -524,9 +536,23 @@ private void emergency(Patient patient){
       
       
 }
+      if(organizatn instanceof DoctorOrganization){
+          System.out.println("hello3");
+          dorg = (DoctorOrganization)organizatn;
+      dorg.getWorkQueue().getWorkRequestList().add(request);
+      System.out.println("bc2");
+               
+      }
+       if(organizatn instanceof ProviderOrganization){
+          System.out.println("hellobrother");
+          porg = (ProviderOrganization)organizatn;
+      porg.getWorkQueue().getWorkRequestList().add(medrequest);
+      System.out.println("bcc");
+               
+      }
     }
         }
-         }
+        }
 }
 }
 

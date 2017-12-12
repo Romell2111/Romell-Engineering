@@ -7,6 +7,7 @@ package Business.role;
 
 import Business.EcoSystem;
 import Business.enterprise.Enterprise;
+import Business.network.Network;
 import Business.organization.Organization;
 import Business.useraccount.UserAccount;
 import javax.swing.JPanel;
@@ -19,9 +20,11 @@ import userinterface.ambulancerole.AmbulanceWorkAreaJPanel;
 public class AmbulanceRole extends Role{
     
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount useraccount, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new AmbulanceWorkAreaJPanel(userProcessContainer, useraccount, organization, business);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount useraccount, Organization organization, Enterprise enterprise, EcoSystem business,Network network) {
+        return new AmbulanceWorkAreaJPanel(userProcessContainer, useraccount, organization, business,network);
     }
+
+   
     
 }
 

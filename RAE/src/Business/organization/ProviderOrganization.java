@@ -3,37 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.Organization;
+package Business.organization;
 
-import Business.Role.DistributorAdminRole;
-import Business.Role.Role;
-import Business.Supplier.Provider;
+import Business.role.NurseRole;
+import Business.role.ProviderRole;
+import Business.role.Role;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  *
- * @author Akshay Singh
+ * @author Romell
  */
-public class ProviderOrganization extends Organization{
-    Provider provider;
-      public ProviderOrganization() {
+public class ProviderOrganization extends EmployeeOrganization {
+    public ProviderOrganization(){
         super(Organization.Type.Provider.getValue());
-        provider= new Provider();
     }
 
-    public Provider getProvider() {
-        return provider;
+    ProviderOrganization(String value) {
+         super(Organization.Type.Provider.getValue());
     }
 
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
-
+   
     @Override
-    public HashSet<Role> getSupportedRole() {
-        
-        return null;
+    public ArrayList<Role> getSupportedRole() {
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(new ProviderRole());
+        return roles;
     }
-     
 }

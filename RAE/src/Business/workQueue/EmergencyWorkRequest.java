@@ -16,6 +16,47 @@ public class EmergencyWorkRequest extends WorkRequest{
     private String ambResult;
 private double latitude;
 private double longitude;
+private String city;
+
+    public String getDocResult() {
+        return docResult;
+    }
+
+    public void setDocResult(String docResult) {
+        this.docResult = docResult;
+    }
+
+    public String getNurResult() {
+        return nurResult;
+    }
+
+    public void setNurResult(String nurResult) {
+        this.nurResult = nurResult;
+    }
+
+    public String getLabResult() {
+        return labResult;
+    }
+
+    public void setLabResult(String labResult) {
+        this.labResult = labResult;
+    }
+
+    public String getAmbResult() {
+        return ambResult;
+    }
+
+    public void setAmbResult(String ambResult) {
+        this.ambResult = ambResult;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public double getLatitude() {
         return latitude;

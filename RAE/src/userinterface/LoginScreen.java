@@ -28,13 +28,14 @@ public class LoginScreen extends javax.swing.JPanel {
      * Creates new form LoginScreen
      */
          private EcoSystem system;
+         private Network network;
      private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     JPanel container;
     EmployeeOrganization org;
     PatientOrganization organizatn;
-    public LoginScreen(JPanel container, EcoSystem system) {
+    public LoginScreen(JPanel container, EcoSystem system,Network network) {
         initComponents();
-          
+          this.network=network;
         this.container = container;
         this.system = system;
          
@@ -266,7 +267,7 @@ public class LoginScreen extends javax.swing.JPanel {
             return;
         } else {
             CardLayout layout = (CardLayout) container.getLayout();
-            container.add("workArea", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
+            container.add("workArea", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system,network));
             layout.next(container);
         }
         loginJButton.setEnabled(true);

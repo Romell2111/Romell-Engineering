@@ -5,6 +5,7 @@
  */
 package Business;
 
+import Business.Medicine.MedicineDirectory;
 import Business.network.Network;
 import Business.organization.EmployeeOrganization;
 import Business.role.Role;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class EcoSystem extends EmployeeOrganization{
     private static EcoSystem ecosys;
     private ArrayList<Network> networkList;
+    private MedicineDirectory medicineDirectory;
 
     public static EcoSystem getInstance() {
         if (ecosys == null) {
@@ -26,9 +28,19 @@ public class EcoSystem extends EmployeeOrganization{
         return ecosys;
     }
 
+    public MedicineDirectory getMedicineDirectory() {
+        return medicineDirectory;
+    }
+
+    public void setMedicineDirectory(MedicineDirectory medicineDirectory) {
+        this.medicineDirectory = medicineDirectory;
+    }
+
     private EcoSystem() {
         super(null);
         networkList = new ArrayList<>();
+        medicineDirectory=new MedicineDirectory();
+        
     }
 
     public ArrayList<Network> getNetworkList() {

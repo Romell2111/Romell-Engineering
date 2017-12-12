@@ -12,6 +12,7 @@ import Business.organization.AmbulanceOrganization;
 import Business.organization.Organization;
 import Business.useraccount.UserAccount;
 import Business.workQueue.EmergencyWorkRequest;
+import Business.workQueue.MedicineSupplyWorkRequest;
 import Business.workQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -45,19 +47,44 @@ public class AmbulanceWorkAreaJPanel extends javax.swing.JPanel {
     public double latitude;
     public double longitude;
     public static int ambulanceNo;
+    private Network net;
     
     
-    public AmbulanceWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
-        initComponents();
+    
+
+   
+
+    public AmbulanceWorkAreaJPanel(JPanel userProcessContainer, UserAccount useraccount, Organization organization, EcoSystem business, Network network) {
+            initComponents();
          this.userProcessContainer = userProcessContainer;
-        this.userAccount = account;
+        this.userAccount = useraccount;
         this.business = business;
         this.ambulanceOrganization = (AmbulanceOrganization)organization;
+        this.net=network;
    
         populateTable();
-       
+       // populateMedicineTable();
     }
-    
+
+        public void populateMedicineTable(){
+        DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
+       
+        
+        model.setRowCount(0);
+        
+        for(WorkRequest request1 : ambulanceOrganization.getWorkQueue().getWorkRequestList()){
+            MedicineSupplyWorkRequest medicineSupplyWorkRequest = (MedicineSupplyWorkRequest)request1;
+            Object[] row = new Object[4];
+            row[0] = medicineSupplyWorkRequest.getDosageRequest();
+            row[1] = medicineSupplyWorkRequest.getQuantity();
+            row[2] = medicineSupplyWorkRequest;
+            row[3] = medicineSupplyWorkRequest.getStatus();
+            
+            model.addRow(row);
+          
+            
+        }
+    }
     public void populateTable(){
         DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
         ambulanceNo=ambulanceOrganization.getAmbulanceNo();
@@ -101,6 +128,11 @@ public class AmbulanceWorkAreaJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         ambulNo = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblMedicine = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        btnMedAssign = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 204)));
@@ -189,12 +221,47 @@ public class AmbulanceWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("No Of Ambulance :");
 
+        jButton2.setText("SEND TO OTHER NETWORK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        tblMedicine.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "DOSAGE ADVICE", "QUANTITY", "MESSAGE", "Last Updated  status"
+            }
+        ));
+        jScrollPane2.setViewportView(tblMedicine);
+
+        jLabel3.setText("MEDICINES RECEIVED FROM PHARMACY");
+
+        btnMedAssign.setText("Assign To Me");
+        btnMedAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMedAssignActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addComponent(jTextField1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoutJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -215,12 +282,17 @@ public class AmbulanceWorkAreaJPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(processJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(processJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(btnMedAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(49, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(logoutJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(303, 303, 303))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,9 +314,17 @@ public class AmbulanceWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(assignJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(processJButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logoutJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(logoutJButton)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(btnMedAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -285,29 +365,7 @@ public class AmbulanceWorkAreaJPanel extends javax.swing.JPanel {
         userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-        if (ambulanceNo==0)
-        {
-           
-        AmbulanceOrganization aorg = null;
-             
-    for(Network network: business.getNetworkList()){
-        for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList()){
-            
-    for(Organization organizatn: enterprise.getOrganizationDirectory().getOrganizationList()){
-      if(organizatn instanceof AmbulanceOrganization){
-          System.out.println("hello1");
-          aorg = (AmbulanceOrganization)organizatn;
-      aorg.getWorkQueue().getWorkRequestList().add(request);
-      System.out.println("bc");
-               
-      }
-        }
-        }
-    }
-        }
-        else{
-        ambulanceNo--;
-        }
+       
     }//GEN-LAST:event_processJButtonActionPerformed
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed
@@ -349,19 +407,69 @@ public class AmbulanceWorkAreaJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here: if (ambulanceNo==0)
+        
+           
+        AmbulanceOrganization aorg = null;
+      
+       EmergencyWorkRequest request = new EmergencyWorkRequest();      
+    for(Network network: business.getNetworkList()){
+        if (network.getName()!=request.getCity())
+        {
+            
+        
+        for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList()){
+            
+    for(Organization organizatn: enterprise.getOrganizationDirectory().getOrganizationList()){
+      if(organizatn instanceof AmbulanceOrganization){
+          System.out.println("hello22");
+          aorg = (AmbulanceOrganization)organizatn;
+      aorg.getWorkQueue().getWorkRequestList().add(request);
+      System.out.println("bc22");
+               
+      }
+        }
+        }
+        }
+    }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnMedAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedAssignActionPerformed
+        // TODO add your handling code here:int selectedRow = workRequestJTable.getSelectedRow();
+ int selectedRow = workRequestJTable.getSelectedRow();
+        if (selectedRow < 0){
+            return;
+        }
+
+        WorkRequest request = (MedicineSupplyWorkRequest)workRequestJTable.getValueAt(selectedRow, 2);
+        request.setReceiver(userAccount);
+        request.setStatus("MEDICINES RECEIVED ");
+        
+        
+        populateMedicineTable();
+    }//GEN-LAST:event_btnMedAssignActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ambulNo;
     private javax.swing.JButton assignJButton;
+    private javax.swing.JButton btnMedAssign;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton logoutJButton;
     private javax.swing.JButton processJButton;
     private javax.swing.JButton refreshJButton;
+    private javax.swing.JTable tblMedicine;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
 //public void locationMap()
