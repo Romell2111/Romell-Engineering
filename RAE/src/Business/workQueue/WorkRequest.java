@@ -8,7 +8,7 @@ package Business.workQueue;
 import Business.useraccount.UserAccount;
 import java.util.ArrayList;
 import java.util.Date;
-import Business.Supplier.Vaccine;
+
 /**
  *
  * @author Akshay Singh
@@ -16,13 +16,13 @@ import Business.Supplier.Vaccine;
 public abstract class WorkRequest {
     
     private String message;
-    private UserAccount sender;
+    private String sender;
     private UserAccount receiver;
     private ArrayList<UserAccount> receiverList;
     private String status;
     private Date requestDate;
     private Date resolveDate;
-    private Vaccine vaccine;
+    
     public WorkRequest(){
         requestDate = new Date();
        receiverList = new ArrayList<>();
@@ -36,24 +36,17 @@ public abstract class WorkRequest {
         this.message = message;
     }
 
-    public UserAccount getSender() {
+    public String getSender() {
         return sender;
     }
 
-    public void setSender(UserAccount sender) {
+    public void setSender(String sender) {
         this.sender = sender;
     }
 
-public Vaccine getVaccine() {
-        
-return vaccine;
-    }
-
    
- public void setVaccine(Vaccine vaccine) 
-{
-        this.vaccine = vaccine;
-    }
+
+
    
 
     public UserAccount getReceiver() {

@@ -8,7 +8,10 @@ import Business.EcoSystem;
 import Business.employee.Employee;
 import Business.enterprise.Enterprise;
 import Business.network.Network;
+import static Business.organization.Organization.Type.DistributorAdmin;
 import Business.role.AdminRole;
+import Business.role.DistributorAdminRole;
+import static Business.role.Role.RoleType.DistributorAdmin;
 import Business.useraccount.UserAccount;
 import Business.validation.ValidationMethods;
 import java.awt.CardLayout;
@@ -303,7 +306,8 @@ return;
 }
         String name = nameJTextField.getText();
         Enterprise enterprise = (Enterprise) enterpriseJComboBox.getSelectedItem();
-       
+       if (enterprise.getEnterpriseType().getValue().equalsIgnoreCase("Hospital"))
+       {
         
         Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
         
@@ -313,6 +317,17 @@ return;
    //     EcoSystem.getInstance().getUserAccountDirectory().createUserAccount(username, password, employee, adminRole);
        
         populateTable();
+       }
+       else{ Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
+        
+        DistributorAdminRole adminRole= new DistributorAdminRole();
+        UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, adminRole);
+          
+   //     EcoSystem.getInstance().getUserAccountDirectory().createUserAccount(username, password, employee, adminRole);
+       
+        populateTable();
+           
+       }
         
     }//GEN-LAST:event_submitJButtonActionPerformed
 

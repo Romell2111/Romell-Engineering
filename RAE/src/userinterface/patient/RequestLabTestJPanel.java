@@ -121,7 +121,8 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
         
         LabWorkRequest request = new LabWorkRequest();
         request.setMessage(message);
-        request.setSender(userAccount);
+     request.setSent(userAccount);
+
         request.setStatus("Sent");
         
         Organization org = null;

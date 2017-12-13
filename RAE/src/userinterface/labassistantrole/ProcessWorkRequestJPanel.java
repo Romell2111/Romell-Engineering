@@ -19,15 +19,17 @@ import javax.swing.JPanel;
 public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
-    EmergencyWorkRequest request;
+    LabWorkRequest request;
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, EmergencyWorkRequest request) {
-        initComponents();
+
+    ProcessWorkRequestJPanel(JPanel userProcessContainer, LabWorkRequest request) {
+         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,7 +128,7 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         return;
                 }
 
-        request.setLabTestResult(resultJTextField.getText());
+        request.setTestResult(resultJTextField.getText());
         request.setStatus("Completed");
         resultJTextField.setText("");
     }//GEN-LAST:event_submitJButtonActionPerformed

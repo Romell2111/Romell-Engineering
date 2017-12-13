@@ -5,6 +5,8 @@
  */
 package Business.patient;
 
+import Business.Medicine.Medicine;
+import Business.Medicine.MedicineDirectory;
 import Business.applicationUser.ApplicationUser;
 
 /**
@@ -21,6 +23,25 @@ public class Patient extends ApplicationUser {
     private PatientVitalSignHistory pvsh;
     private int Age;
     private String DoctorName;
+    private Medicine medicine;
+    private int abnormalNo;
+
+    public int getAbnormalNo() {
+        return abnormalNo;
+    }
+
+    public void setAbnormalNo(int abnormalNo) {
+        this.abnormalNo = abnormalNo;
+    }
+    
+
+    public Medicine getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(Medicine medicine) {
+        this.medicine = medicine;
+    }
 
     
     
@@ -28,6 +49,8 @@ public class Patient extends ApplicationUser {
     
     public Patient(){
     pvsh = new PatientVitalSignHistory();
+   medicine=new Medicine();
+    
     }
 
     public String getPatientLocation() {

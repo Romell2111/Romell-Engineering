@@ -55,7 +55,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             EmergencyWorkRequest emergencyWorkRequest = (EmergencyWorkRequest)request;
             Object[] row = new Object[4];
             row[0] = emergencyWorkRequest;
-//            row[1] = emergencyWorkRequest.getSender().getApplicationUser().getName();
+ row[1] = emergencyWorkRequest.getSender();
             row[2] = emergencyWorkRequest.getReceiver() == null ? null : request.getReceiver().getApplicationUser().getName();
             row[3] = emergencyWorkRequest.getStatus();
                      
@@ -252,6 +252,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         Component component = componentArray[componentArray.length - 1];
         LoginScreen sysAdminwjp = (LoginScreen) component;
         //  sysAdminwjp.populateTree();
+         sysAdminwjp.loginDisabled();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
 

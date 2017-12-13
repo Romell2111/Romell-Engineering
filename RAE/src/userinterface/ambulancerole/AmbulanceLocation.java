@@ -5,6 +5,9 @@
  */
 package userinterface.ambulancerole;
 
+import Business.GeoLocation.GeoLocation;
+import Business.GeoLocation.ServerLocation.ServerLocation;
+import Business.Maps;
 import com.teamdev.jxmaps.LatLng;
 import com.teamdev.jxmaps.swing.MapView;
 import com.teamdev.jxmaps.Map;
@@ -23,9 +26,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 
 import javax.swing.JPanel;
+import userinterface.sensor.SensorInputJPanel;
 
 /**
  *
@@ -33,8 +40,11 @@ import javax.swing.JPanel;
  */
 public class AmbulanceLocation extends javax.swing.JPanel {
      private JPanel userProcessContainer;
-     private double latitude;
-    private double longitude;
+     private double lat;
+    private double lon;
+    public double latitude;
+    public double longitude;
+    public char unit;
 
    
    
@@ -42,30 +52,58 @@ public class AmbulanceLocation extends javax.swing.JPanel {
     AmbulanceLocation(JPanel userProcessContainer, double latitude, double longitude) throws IOException {
         initComponents();
          this.userProcessContainer = userProcessContainer;
-         this.latitude=latitude;
-         this.longitude=longitude;
-         displayMap();
+         this.lat=latitude;
+         this.lon=longitude;
+//         Maps.displayMap(String.valueOf(latitude), String.valueOf(longitude));
+//         ImageIcon imageIcon = new ImageIcon((new ImageIcon("image.jpg"))
+//.getImage().getScaledInstance(630, 600,
+//java.awt.Image.SCALE_SMOOTH));
     }
-    public void displayMap() throws MalformedURLException, IOException
-    {String imageUrl =" https://maps.googleapis.com/maps/api/staticmap?center="+latitude+","+longitude+"&zoom=11&size=612x612&scale=2&maptype=roadmap";
-            String destinationFile = "image.jpg";
-            String str = destinationFile;
-            URL url = new URL(imageUrl);
-            InputStream is = url.openStream();
-            OutputStream os = new FileOutputStream(destinationFile);
+    public void geolocation()
+    
+        
+{
+      String ipaddress=ipAddressTxt.getText();
+                    try {
+                      ServerLocation serverLocation=  GeoLocation.getLocation(ipaddress);
+                      
+                       
+                    latitude=Double.parseDouble(serverLocation.getLatitude());
+                     longitude=Double.parseDouble(serverLocation.getLongitude());
+                    
+                     System.out.println(latitude);
+                     System.out.println(longitude);
+                     txtLat.setText(String.valueOf(latitude));
+                     txtLon.setText(String.valueOf(longitude));
+                    } catch (IOException ex) {
+                        Logger.getLogger(SensorInputJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+    }
+     public double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
+      double theta = lon1 - lon2;
+      double distance = Math.sin(degreetoradian(lat1)) * Math.sin(degreetoradian(lat2)) + Math.cos(degreetoradian(lat1)) * Math.cos(degreetoradian(lat2)) * Math.cos(degreetoradian(theta));
+      distance = Math.acos(distance);
+      distance = radiantodegree(distance);
+      distance = distance * 60 * 1.1515;
+      if (unit == 'K') {
+        distance = distance * 1.609344;
+      } else if (unit == 'N') {
+        distance = distance * 0.8684;
+        }
+      return (distance);
+     }
+       private double degreetoradian(double deg) {
+      return (deg * Math.PI / 180.0);
+    }
 
-            byte[] b = new byte[2048];
-            int length;
-
-            while ((length = is.read(b)) != -1) {
-                os.write(b, 0, length);
-            }
-
-            is.close();
-            os.close();
+    private double radiantodegree(double rad) {
+      return (rad * 180.0 / Math.PI);
+    }
+    
+    
+    
             
-            
-        } 
+         
 
 
 
@@ -81,8 +119,16 @@ public class AmbulanceLocation extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        imageIcon = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        ipAddressTxt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtLat = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtLon = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        txtCal = new javax.swing.JTextField();
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/backbutton.png"))); // NOI18N
 
@@ -91,37 +137,119 @@ public class AmbulanceLocation extends javax.swing.JPanel {
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setText("IP ADDRESS ");
+
+        jLabel2.setText("Latitude");
+
+        txtLat.setEditable(false);
+
+        jLabel3.setText("Longitude");
+
+        txtLon.setEditable(false);
+
+        jButton2.setText("Calculate");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Calculate Distance Between Patient and Ambulance");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
-                .addComponent(imageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 796, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
             .addComponent(jTextField1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(68, 68, 68)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ipAddressTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(txtLat))
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtLon, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89)))
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(182, 182, 182))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(txtCal, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(imageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ipAddressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtLat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtLon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(txtCal, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:geolocation;
+        geolocation();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        txtCal.setText(String.valueOf(distance(lat, lon, latitude, longitude, unit)));
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel imageIcon;
+    private javax.swing.JTextField ipAddressTxt;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtCal;
+    private javax.swing.JTextField txtLat;
+    private javax.swing.JTextField txtLon;
     // End of variables declaration//GEN-END:variables
 
 }

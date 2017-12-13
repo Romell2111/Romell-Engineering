@@ -7,6 +7,7 @@ package userinterface;
 import Business.ConfigureSystem;
 import business.DB4OUtil.DB4OUtil;
 import Business.EcoSystem;
+import Business.network.Network;
 //import business.DB4OUtil.DB4OUtil;
 import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
@@ -25,13 +26,15 @@ public class MainJFrame extends javax.swing.JFrame {
      */
        private static EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    private Network network;
    
     public MainJFrame() {
         initComponents();
            system = dB4OUtil.retrieveSystem();
+           this.network=network;
            
               
-    LoginScreen am = new LoginScreen( container, system);
+    LoginScreen am = new LoginScreen( container, system,network);
         container.add("loginWorkAreaPanel",am);
         CardLayout layout=(CardLayout)container.getLayout();
         layout.next(container);
