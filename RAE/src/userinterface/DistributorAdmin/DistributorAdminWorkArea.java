@@ -175,6 +175,8 @@ public class DistributorAdminWorkArea extends javax.swing.JPanel {
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         LoginScreen sysAdminwjp = (LoginScreen) component;
+        sysAdminwjp.loginDisabled();
+        
         //  sysAdminwjp.populateTree();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);

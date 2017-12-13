@@ -211,6 +211,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         Component component = componentArray[componentArray.length - 1];
         LoginScreen sysAdminwjp = (LoginScreen) component;
         //  sysAdminwjp.populateTree();
+         sysAdminwjp.loginDisabled();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
 

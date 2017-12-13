@@ -5,12 +5,31 @@
  */
 package Business.workQueue;
 
+import Business.useraccount.UserAccount;
+
 /**
  *
  * @author Akshay Singh
  */
 public class LabWorkRequest extends WorkRequest {
       private String testCaseResult;
+      private UserAccount sent;
+
+    public String getTestCaseResult() {
+        return testCaseResult;
+    }
+
+    public void setTestCaseResult(String testCaseResult) {
+        this.testCaseResult = testCaseResult;
+    }
+
+    public UserAccount getSent() {
+        return sent;
+    }
+
+    public void setSent(UserAccount sent) {
+        this.sent = sent;
+    }
 
     public String getTestResult() {
         return testCaseResult;

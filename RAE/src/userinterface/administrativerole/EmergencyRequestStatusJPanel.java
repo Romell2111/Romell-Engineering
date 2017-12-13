@@ -87,7 +87,7 @@ public class EmergencyRequestStatusJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Last Updated By", "Amb Result", "Nurse Result", "Lab Result", "Doctor Result"
+                "Message", "Status", "Amb Result", "Nurse Result", "Lab Result", "Doctor Result"
             }
         ) {
             Class[] types = new Class [] {
@@ -179,7 +179,7 @@ public class EmergencyRequestStatusJPanel extends javax.swing.JPanel {
             Object[] row = new Object[6];
             row[0] = emergencyWorkRequest.getMessage();
             row[1] = emergencyWorkRequest.getReceiver();
-           // row[2] = emergencyWorkRequest.getStatus();
+            row[2] = emergencyWorkRequest.getStatus();
             String ambResult = emergencyWorkRequest.getAmbulanceTestResult();
             String doctorResult = emergencyWorkRequest.getDoctorTestResult();
             String labResult = emergencyWorkRequest.getLabTestResult();
@@ -239,7 +239,7 @@ patientVitalSignViaSensor.setEmergencyraiserequest(true);
     
     EmergencyWorkRequest request = new EmergencyWorkRequest();
       request.setMessage("Emergency for Patient:"+patient.getId());
-      request.setSender(account);
+//      request.setSender(account);
       request.setStatus("Waiting for response");
     
     

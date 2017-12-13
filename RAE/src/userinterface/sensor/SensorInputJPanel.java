@@ -28,6 +28,7 @@ import userinterface.LoginScreen;
 import Business.Email.SendMailUsingAuthentication;
 import Business.GeoLocation.GeoLocation;
 import Business.GeoLocation.ServerLocation.ServerLocation;
+import Business.Message.Message_Twilio;
 import Business.organization.DoctorOrganization;
 import Business.organization.ProviderOrganization;
 import Business.workQueue.MedicineSupplyWorkRequest;
@@ -54,6 +55,7 @@ public class SensorInputJPanel extends javax.swing.JPanel {
    public double latitude;
    public double longitude;
    public String city;
+   
   
     
     public SensorInputJPanel(JPanel container, EcoSystem system) {
@@ -63,6 +65,8 @@ public class SensorInputJPanel extends javax.swing.JPanel {
         populatePatientComboBox();
         saveButton.setEnabled(false);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -276,6 +280,7 @@ public class SensorInputJPanel extends javax.swing.JPanel {
      Component[] componentArray = container.getComponents();
       Component component = componentArray[componentArray.length - 1];
        LoginScreen sysAdminwjp = (LoginScreen) component;
+        sysAdminwjp.loginDisabled();
        CardLayout layout = (CardLayout) container.getLayout();
     layout.previous(container);
     }//GEN-LAST:event_backJButtonActionPerformed
@@ -329,6 +334,20 @@ return;
                 {
                     vitalSignStatusTextField.setText("Abnormal");
                     patientVitalSignViaSensor.setVitalSignStatus("Abnormal");
+                    emergency(patient);
+                 Message_Twilio.send_Message(patient.getPatientContact(),patient.getName());
+                 int count=0;
+                 count=patient.getAbnormalNo();
+                count++;
+                patient.setAbnormalNo(count);
+                 System.out.println(patient.getAbnormalNo());
+                 patientRelative[0]=patient.getPatientRelativeContact();
+                patientRelative[1]=patient.getPatientRelativeContact1();
+                    try {
+                        SendMailUsingAuthentication.postMail(patientRelative, message, sender);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(SensorInputJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 
                 }
                 else{
@@ -348,6 +367,12 @@ return;
                     vitalSignStatusTextField.setText("Abnormal");
                      patientVitalSignViaSensor.setVitalSignStatus("Abnormal");
                 emergency(patient);
+               // Message_Twilio.send_Message(patient.getPatientContact(),patient.getName());
+                int count=0;
+                count=patient.getAbnormalNo();
+                count++;
+                patient.setAbnormalNo(count);
+                 System.out.println(patient.getAbnormalNo());
                
                 patientRelative[0]=patient.getPatientRelativeContact();
                 patientRelative[1]=patient.getPatientRelativeContact1();
@@ -379,6 +404,12 @@ return;
                     vitalSignStatusTextField.setText("Abnormal");
                  patientVitalSignViaSensor.setVitalSignStatus("Abnormal");
                 emergency(patient);
+                 Message_Twilio.send_Message(patient.getPatientContact(),patient.getName());
+                 int count=0;
+                 count=patient.getAbnormalNo();
+                count++;
+                patient.setAbnormalNo(count);
+                 System.out.println(patient.getAbnormalNo());
                  patientRelative[0]=patient.getPatientRelativeContact();
                 patientRelative[1]=patient.getPatientRelativeContact1();
                     try {
@@ -405,6 +436,14 @@ return;
                     vitalSignStatusTextField.setText("Abnormal");
                  patientVitalSignViaSensor.setVitalSignStatus("Abnormal");
                 emergency(patient);
+                    System.out.println("message sent");
+               //  Message_Twilio.send_Message(patient.getPatientContact(),patient.getName());
+                 int count=0;
+                 count=patient.getAbnormalNo();
+                count++;
+                patient.setAbnormalNo(count);
+                    System.out.println(patient.getAbnormalNo());
+                    System.out.println("message delivered");
                  patientRelative[0]=patient.getPatientRelativeContact();
                 patientRelative[1]=patient.getPatientRelativeContact1();
                     try {
@@ -493,7 +532,7 @@ private void emergency(Patient patient){
     
     EmergencyWorkRequest request = new EmergencyWorkRequest();
       request.setMessage("Emergency for Patient:"+patient.getId());
-//      request.setSender(account);
+request.setSender(patient.getName());
       request.setStatus("Waiting for other Team's response");
       request.setLatitude(latitude);
       request.setLongitude(longitude);
@@ -505,6 +544,7 @@ private void emergency(Patient patient){
       medrequest.setQuantity(5);
       medrequest.setMedicineName(patient.getMedicine().toString());
       medrequest.setCity(city);
+      medrequest.setSender(patient.getName());
       
       
       
@@ -530,12 +570,7 @@ private void emergency(Patient patient){
       System.out.println("pq");
       }
       
-      if(organizatn instanceof LabOrganization){
-          lorg = (LabOrganization)organizatn;
-      lorg.getWorkQueue().getWorkRequestList().add(request);
-      
-      
-}
+     
       if(organizatn instanceof DoctorOrganization){
           System.out.println("hello3");
           dorg = (DoctorOrganization)organizatn;
@@ -544,10 +579,10 @@ private void emergency(Patient patient){
                
       }
        if(organizatn instanceof ProviderOrganization){
-          System.out.println("hellobrother");
+          System.out.println("sent to provider");
           porg = (ProviderOrganization)organizatn;
       porg.getWorkQueue().getWorkRequestList().add(medrequest);
-      System.out.println("bcc");
+      System.out.println("done sending to provider");
                
       }
     }

@@ -16,7 +16,7 @@ import java.util.Date;
 public abstract class WorkRequest {
     
     private String message;
-    private UserAccount sender;
+    private String sender;
     private UserAccount receiver;
     private ArrayList<UserAccount> receiverList;
     private String status;
@@ -36,13 +36,15 @@ public abstract class WorkRequest {
         this.message = message;
     }
 
-    public UserAccount getSender() {
+    public String getSender() {
         return sender;
     }
 
-    public void setSender(UserAccount sender) {
+    public void setSender(String sender) {
         this.sender = sender;
     }
+
+   
 
 
    

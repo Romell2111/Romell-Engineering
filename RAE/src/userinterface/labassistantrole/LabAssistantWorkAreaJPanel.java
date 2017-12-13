@@ -48,14 +48,17 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         
         for(WorkRequest request : labOrganization.getWorkQueue().getWorkRequestList()){
-            EmergencyWorkRequest emergencyWorkRequest = (EmergencyWorkRequest)request;
+            if (request instanceof LabWorkRequest)
+            {
+            LabWorkRequest labWorkRequest = (LabWorkRequest)request;
             Object[] row = new Object[4];
-            row[0] = emergencyWorkRequest;
-//           row[1] = emergencyWorkRequest.getSender().getApplicationUser().getName();
-            row[2] = emergencyWorkRequest.getReceiver() == null ? null : request.getReceiver().getApplicationUser().getName();
-            row[3] = emergencyWorkRequest.getStatus();
+            row[0] = labWorkRequest;
+          row[1] = labWorkRequest.getSent().getApplicationUser().getName();
+            row[2] = labWorkRequest.getReceiver() == null ? null : request.getReceiver().getApplicationUser().getName();
+            row[3] = labWorkRequest.getStatus();
              
             model.addRow(row);
+        }
         }
     }
 
@@ -221,9 +224,9 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         
-        WorkRequest request = (EmergencyWorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
+        WorkRequest request = (LabWorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
         request.setReceiver(userAccount);
-        request.setStatus("Emergency Acknowledged");
+        request.setStatus("Testing done");
         populateTable();
         
     }//GEN-LAST:event_assignJButtonActionPerformed
@@ -236,7 +239,7 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         
-        EmergencyWorkRequest request = (EmergencyWorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
+        LabWorkRequest request = (LabWorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
      
         request.setStatus("Processing");
         
@@ -264,6 +267,7 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         LoginScreen sysAdminwjp = (LoginScreen) component;
+         sysAdminwjp.loginDisabled();
         //  sysAdminwjp.populateTree();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);

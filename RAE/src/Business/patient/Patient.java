@@ -24,6 +24,16 @@ public class Patient extends ApplicationUser {
     private int Age;
     private String DoctorName;
     private Medicine medicine;
+    private int abnormalNo;
+
+    public int getAbnormalNo() {
+        return abnormalNo;
+    }
+
+    public void setAbnormalNo(int abnormalNo) {
+        this.abnormalNo = abnormalNo;
+    }
+    
 
     public Medicine getMedicine() {
         return medicine;

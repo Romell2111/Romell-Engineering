@@ -77,14 +77,14 @@ public class ProviderWorkSpace extends javax.swing.JPanel {
           System.out.println("hello1");
           aorg = (AmbulanceOrganization)organizatn;
       aorg.getWorkQueue().getWorkRequestList().add(request);
-      System.out.println("bc");
+      System.out.println("sent to ambulance");
                
       }
       if(organizatn instanceof DoctorOrganization){
           System.out.println("ab");
           dorg = (DoctorOrganization)organizatn;
       dorg.getWorkQueue().getWorkRequestList().add(request);
-      System.out.println("pq");
+      System.out.println("sent to doctor");
       }
     }
         }
@@ -99,10 +99,12 @@ public class ProviderWorkSpace extends javax.swing.JPanel {
         model.setRowCount(0);
         
         for(WorkRequest request : providerOrganization.getWorkQueue().getWorkRequestList()){
+             if (request instanceof MedicineSupplyWorkRequest )
+             {
             MedicineSupplyWorkRequest medicineWorkRequest = (MedicineSupplyWorkRequest)request;
-            Object[] row = new Object[3];
+            Object[] row = new Object[5];
             row[0] = medicineWorkRequest;
-            //row[1] = emergencyWorkRequest.getSender().getApplicationUser().getName();
+            row[1] = medicineWorkRequest.getSender();
             row[2] = medicineWorkRequest.getReceiver() == null ? null : request.getReceiver().getApplicationUser().getName();
             row[3] = medicineWorkRequest.getStatus();
             row[4]=medicineWorkRequest.getQuantity();
@@ -112,6 +114,7 @@ public class ProviderWorkSpace extends javax.swing.JPanel {
 //            latitude=emergencyWorkRequest.getLatitude();
 //            longitude=emergencyWorkRequest.getLongitude();
             
+        }
         }
     }
 
@@ -317,6 +320,7 @@ public class ProviderWorkSpace extends javax.swing.JPanel {
         Component component = componentArray[componentArray.length - 1];
         LoginScreen sysAdminwjp = (LoginScreen) component;
         //  sysAdminwjp.populateTree();
+         sysAdminwjp.loginDisabled();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
 
