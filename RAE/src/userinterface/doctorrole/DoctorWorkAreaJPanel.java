@@ -399,8 +399,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         }
 
         DoctorOrganization dorg = null;
-
-        EmergencyWorkRequest request = new EmergencyWorkRequest();
+ EmergencyWorkRequest request = (EmergencyWorkRequest) workRequestJTable.getValueAt(selectedRow, 0);
         for(Network network: system.getNetworkList()){
             if (network.getName()!=request.getCity())
             {

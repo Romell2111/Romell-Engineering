@@ -447,7 +447,7 @@ public class AmbulanceWorkAreaJPanel extends javax.swing.JPanel {
            
         AmbulanceOrganization aorg = null;
       
-       EmergencyWorkRequest request = new EmergencyWorkRequest();      
+       EmergencyWorkRequest request = (EmergencyWorkRequest) workRequestJTable.getValueAt(selectedRow, 0);
     for(Network network: business.getNetworkList()){
         if (network.getName()!=request.getCity())
         {
