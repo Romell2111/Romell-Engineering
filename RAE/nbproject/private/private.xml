@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Romell/Documents/NetBeansProjects/RAE/src/userinterface/administrativerole/PatientAnalytics.java</file>
-            <file>file:/C:/Users/Romell/Documents/NetBeansProjects/RAE/src/userinterface/sensor/SensorInputJPanel.java</file>
-            <file>file:/C:/Users/Romell/Documents/NetBeansProjects/RAE/src/userinterface/labassistantrole/LabAssistantWorkAreaJPanel.java</file>
+            <file>file:/C:/Users/eric/AED_LAB_DEMO/RAE/aed_final_project_rae/RAE/src/userinterface/MainJFrame.java</file>
+            <file>file:/C:/Users/eric/AED_LAB_DEMO/RAE/aed_final_project_rae/RAE/src/userinterface/ambulancerole/AmbulanceWorkAreaJPanel.java</file>
+            <file>file:/C:/Users/eric/AED_LAB_DEMO/RAE/aed_final_project_rae/RAE/src/Business/Message/Message_Twilio.java</file>
+            <file>file:/C:/Users/eric/AED_LAB_DEMO/RAE/aed_final_project_rae/RAE/src/Business/GeoLocation/GeoLocation.java</file>
+            <file>file:/C:/Users/eric/AED_LAB_DEMO/RAE/aed_final_project_rae/RAE/src/userinterface/doctorrole/DoctorWorkAreaJPanel.java</file>
+            <file>file:/C:/Users/eric/AED_LAB_DEMO/RAE/aed_final_project_rae/RAE/src/Business/DB4OUtil/DB4OUtil.java</file>
         </group>
     </open-files>
 </project-private>
